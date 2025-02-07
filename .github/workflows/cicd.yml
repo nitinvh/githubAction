@@ -27,6 +27,12 @@ jobs:
       run: |
         pytest
 
+  dockerBuild:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the docker image
+      run: docker build . --file DockerFile --tag workflow-test:$(date+%s)
   build-and-publish:
     needs: build-and-test
     runs-on: ubuntu-latest
